@@ -1,0 +1,9 @@
+.chat-list-container{
+	max-width: 300px;
+}
+
+.chat-container{
+	max-width: 700px;
+	display: flex;
+	flex-direction: column;
+}
