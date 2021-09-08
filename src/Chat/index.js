@@ -60,14 +60,18 @@ function Chat(props) {
 	
 	useEffect(() => {
 					clearForm();
+					let timeout;
 					const prevMess = !!chatId && !!props.chats[chatId] && props.chats[chatId].messages;
-					setTimeout(() => {
-						if (!!chatId && prevMess.length && (prevMess[prevMess.length - 1]?.author !== 'Bot')){
+					if (!!chatId && prevMess.length && (prevMess[prevMess.length - 1]?.author !== 'Bot')){
+						timeout = setTimeout(() => {
 							props.addMessage(chatId, 'Bot-header', 'Bot lorem ipsum text', 'Bot', null)
-						};
-						isFirstRender.current = false;
-					}, 1000);
-	}, [props.chats, chatId, props]);
+							
+						}, 3000);
+					}
+					isFirstRender.current = false;
+					return () => {clearTimeout(timeout)};
+					
+	}, [props.chats]);
 	
 	if (!!chatId && !props.chats[chatId]) {
 	  return <Redirect to="/nochat" />;
@@ -77,7 +81,7 @@ function Chat(props) {
 		<div className="main-container">
 			<ChatList chatList={props.chats} addChat={props.addChat} removeChat={props.removeChat}/>
 			<div className="chat-container">
-			<Message messages={!!chatId ? props.chats[chatId].messages : []} deleteMessage={() => props.removeMessage(chatId)}/>
+			<Message messages={!!chatId ? props.chats[chatId].messages : []} deleteMessage={props.removeMessage} chatId={chatId}/>
 			{!!chatId && <form action="" onSubmit={(event) => props.addMessage(chatId, messageTheme, messageText, messageAuthor, event)} className={classes.root+" form"} noValidate autoComplete="off">
 				<TextField className="form-text" value={messageTheme} onChange={handleChangeTheme} id="outlined-basic" label="Theme" variant="outlined"/>
 				<TextField className="form-text" value={messageText} onChange={handleChangeText} inputRef={formText} multiline={true} rows="5" id="outlined-basic" label="Message" variant="outlined"/>

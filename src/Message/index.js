@@ -31,7 +31,7 @@ function Message(props) {
 			<h2 className="massage-header"><span className="small-text">Theme: </span>{message.header}</h2>
 			<p className="message-text"><span className="small-text">Message: </span>{message.text}</p>
 			<p className="message-author"><cite><span className="small-text">Author: </span>{message.author}</cite></p>
-			<IconButton onClick={(e) => props.deleteMessage(message.id, e)} aria-label="delete" className={classes.button+" delete-button"} >
+			<IconButton onClick={(e) => props.deleteMessage(props.chatId, message.id, e)} aria-label="delete" className={classes.button+" delete-button"} >
 				<DeleteIcon color="secondary"/>
 			</IconButton>
 		</article>

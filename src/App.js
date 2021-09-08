@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 
 import {
  ThemeProvider,
@@ -38,32 +38,32 @@ function App() {
 		}
 	);
 	
-	const addMessage = (chatId, messageTheme, messageText, messageAuthor, event) => {
+	const addMessage = useCallback((chatId, messageTheme, messageText, messageAuthor, event) => {
 		if (event){event.preventDefault();}		
 		const prevMess = !!chatId && !!chats[chatId] && chats[chatId].messages;
 		chats[chatId].messages = [...prevMess,{header: messageTheme, text: messageText, author: messageAuthor, id: `message-${+(new Date())}`}];
 		setChats(Object.assign({},chats));
-	};
+	}, [chats]);
 	
-	const removeMessage = (chatId, id, e) => {
+	const removeMessage = useCallback((chatId, id, e) => {
 		const prevMess = !!chatId && !!chats[chatId] && chats[chatId].messages;
 		let find = prevMess.find((element) => {return element.id === id});
 		prevMess.splice(prevMess.indexOf(find), 1);
 		setChats(Object.assign({},chats));
-	};
+	}, [chats]);
 	
-	const addChat = () => {
+	const addChat = useCallback(() => {
 		
 		chats[`chatId${+new Date()}`] = {name: `chat${+new Date()}`, id: (+new Date()), messages: []};
 
 		setChats(Object.assign({},chats));
-	};
+	}, [chats]);
 	
-	const removeChat = (id, event) => {
+	const removeChat = useCallback((id, event) => {
 		delete chats[id];
 		setChats(Object.assign({},chats));
 		event.preventDefault();
-	};
+	}, [chats]);
 	
 	return (
 		
