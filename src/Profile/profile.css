@@ -1,0 +1,22 @@
+.profile-container{
+	display: flex;
+	background-color: #EEE;
+	flex-direction: column;
+}
+
+.profile-name{
+	position: relative;
+}
+
+.wrong-name{
+	position: absolute;
+	top: 0;
+	left: calc(50% - 60px);
+	display: block;
+	padding: 10px;
+	background: #de2345;
+}
+
+.hidden{
+	visibility: hidden;
+}

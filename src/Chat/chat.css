@@ -1,0 +1,38 @@
+.main-container{
+	display: flex;
+	background-color: #EEE;
+}
+
+.chat-container{
+	max-width: 700px;
+	display: flex;
+	flex-direction: column;
+}
+
+.form{
+	display: block;
+	border: 1px solid black;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-text{
+
+	height: auto;
+	margin: 0 20px 10px;
+}
+
+.form-name{
+	
+}
+
+.form-submit{
+	display: block;
+	margin: 0 10px;
+}
+
+.send-group{
+	display: flex;
+	align-items: flex-end;
+}
