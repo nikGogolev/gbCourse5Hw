@@ -57,7 +57,7 @@ function Message(props) {
 	return (
 		props.messages.map((message, i) => 
 			<article key={message.id} className={classes.message} id={message.id}>
-				<h2 className={classes.messageHeader}><span className={classes.smallText}>Theme: </span>{message.header}</h2>
+				<h2 className={classes.messageHeader}><span className={classes.smallText}>Theme:<br/></span>{message.header}</h2>
 				<p className={classes.messageText}><span className={classes.smallText}>Message:<br/></span>{message.text}</p>
 				<p className={classes.messageAuthor}><cite><span className={classes.smallText}>Author: </span>{message.author}</cite></p>
 				<IconButton onClick={() => handleRemoveMessage(props.chatId, message.id)} aria-label="delete" className={classes.button+" delete-button"} >
