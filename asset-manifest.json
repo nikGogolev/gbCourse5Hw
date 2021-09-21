@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/gbCourse5Hw/static/css/main.e338351f.chunk.css",
+    "main.js": "/gbCourse5Hw/static/js/main.ade9033c.chunk.js",
+    "main.js.map": "/gbCourse5Hw/static/js/main.ade9033c.chunk.js.map",
+    "runtime-main.js": "/gbCourse5Hw/static/js/runtime-main.4cd2585f.js",
+    "runtime-main.js.map": "/gbCourse5Hw/static/js/runtime-main.4cd2585f.js.map",
+    "static/js/2.d2888311.chunk.js": "/gbCourse5Hw/static/js/2.d2888311.chunk.js",
+    "static/js/2.d2888311.chunk.js.map": "/gbCourse5Hw/static/js/2.d2888311.chunk.js.map",
+    "static/js/3.8ed6c15d.chunk.js": "/gbCourse5Hw/static/js/3.8ed6c15d.chunk.js",
+    "static/js/3.8ed6c15d.chunk.js.map": "/gbCourse5Hw/static/js/3.8ed6c15d.chunk.js.map",
+    "index.html": "/gbCourse5Hw/index.html",
+    "static/css/main.e338351f.chunk.css.map": "/gbCourse5Hw/static/css/main.e338351f.chunk.css.map",
+    "static/js/2.d2888311.chunk.js.LICENSE.txt": "/gbCourse5Hw/static/js/2.d2888311.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4cd2585f.js",
+    "static/js/2.d2888311.chunk.js",
+    "static/css/main.e338351f.chunk.css",
+    "static/js/main.ade9033c.chunk.js"
+  ]
+}
