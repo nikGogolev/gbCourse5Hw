@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/gbCourse5Hw/static/css/main.e338351f.chunk.css",
-    "main.js": "/gbCourse5Hw/static/js/main.72101b0f.chunk.js",
-    "main.js.map": "/gbCourse5Hw/static/js/main.72101b0f.chunk.js.map",
+    "main.js": "/gbCourse5Hw/static/js/main.76855938.chunk.js",
+    "main.js.map": "/gbCourse5Hw/static/js/main.76855938.chunk.js.map",
     "runtime-main.js": "/gbCourse5Hw/static/js/runtime-main.30c8d38d.js",
     "runtime-main.js.map": "/gbCourse5Hw/static/js/runtime-main.30c8d38d.js.map",
-    "static/js/2.0001fa34.chunk.js": "/gbCourse5Hw/static/js/2.0001fa34.chunk.js",
-    "static/js/2.0001fa34.chunk.js.map": "/gbCourse5Hw/static/js/2.0001fa34.chunk.js.map",
+    "static/js/2.78b1fa6a.chunk.js": "/gbCourse5Hw/static/js/2.78b1fa6a.chunk.js",
+    "static/js/2.78b1fa6a.chunk.js.map": "/gbCourse5Hw/static/js/2.78b1fa6a.chunk.js.map",
     "static/js/3.eb9d28db.chunk.js": "/gbCourse5Hw/static/js/3.eb9d28db.chunk.js",
     "static/js/3.eb9d28db.chunk.js.map": "/gbCourse5Hw/static/js/3.eb9d28db.chunk.js.map",
     "index.html": "/gbCourse5Hw/index.html",
     "static/css/main.e338351f.chunk.css.map": "/gbCourse5Hw/static/css/main.e338351f.chunk.css.map",
-    "static/js/2.0001fa34.chunk.js.LICENSE.txt": "/gbCourse5Hw/static/js/2.0001fa34.chunk.js.LICENSE.txt"
+    "static/js/2.78b1fa6a.chunk.js.LICENSE.txt": "/gbCourse5Hw/static/js/2.78b1fa6a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.30c8d38d.js",
-    "static/js/2.0001fa34.chunk.js",
+    "static/js/2.78b1fa6a.chunk.js",
     "static/css/main.e338351f.chunk.css",
-    "static/js/main.72101b0f.chunk.js"
+    "static/js/main.76855938.chunk.js"
   ]
 }
