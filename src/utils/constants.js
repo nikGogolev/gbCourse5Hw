@@ -6,3 +6,5 @@ export const STATUSES = {
 	SUCCESS: 'success',
 	FAILURE: 'failure'
 };
+
+export const HOMEPAGE = "/gbCourse5Hw";

@@ -1,16 +1,14 @@
-import {PROFILE_CHECKBOX} from '../actions/toggleProfileCheckbox'
-import {PROFILE_NAME} from '../actions/setProfileName'
+import {INIT_PROFILE_NAME} from '../actions/initProfileName';
+import initialState from '../initialState';
+const {profile} = initialState;
 
-function profileReducer(state = false, action) {
+function profileReducer(state = profile, action) {
     switch(action.type) {
-        case PROFILE_CHECKBOX: return {...state, checkboxState: action.checkboxState};
-		
-		case PROFILE_NAME: 
-			if (!/bot/i.test(action.name)) return {...state, name: action.name, wrongName: false};
-			else return {...state, wrongName: true}
+		case INIT_PROFILE_NAME:
+			return {...state, name: action.name};
         
         default: return state;
     }
-}
+};
 
 export default profileReducer;

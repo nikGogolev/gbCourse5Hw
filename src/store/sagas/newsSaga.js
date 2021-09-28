@@ -3,7 +3,7 @@ import { put, call } from 'redux-saga/effects';
 import { getNewsRequest, getNewsSuccess, getNewsFailure } from '../actions/getNews';
 import { URL_NEWS } from '../../utils/constants';
 
-const fetchData = (url) => fetch(url)
+export const fetchData = (url) => fetch(url)
     .then(result => {
         if (!result.ok) throw Error(result.status + ' ' + result.statusText);
         return result.json();
@@ -21,4 +21,4 @@ export const onGetNewsWithSaga = function* (action) {
     } catch (err) {
         yield put(getNewsFailure(err.message));
     }
-}
+};

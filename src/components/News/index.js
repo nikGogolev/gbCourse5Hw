@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {getNewsList, getNewsErrorStatus, getNewsErrorMessage, getNewsRequestStatus} from '../../store/selectors/newsSelectors';
@@ -34,16 +34,18 @@ function News(props) {
 	
 	const handleFetchNews = useCallback(() => {
 		dispatch(getNewsWithSaga());
-	});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	
 	useEffect(() => {
 		handleFetchNews();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	
 	const renderNews = useCallback(
-    (newsItem) => <li key={newsItem.id}><a href={newsItem.url} target="_blank" rel="noreferrer" className={classes.newsItem}>{newsItem.title || 'No description'}</a></li>,
-    []
-  );
+    (newsItem) => <li key={newsItem.id}><a href={newsItem.url} target="_blank" rel="noreferrer" className={classes.newsItem}>{newsItem.title || 'No description'}</a></li>
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	, []);
   
 	if (isError) {
 		return (
@@ -66,6 +68,6 @@ function News(props) {
 		<ul className={classes.root}>{newsList.map(renderNews)}</ul>
 	</>
 	);
-}
+};
 
 export default News;

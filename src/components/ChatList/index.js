@@ -13,7 +13,7 @@ function ChatList(props) {
 	return (
 		<List component="nav" aria-label="main mailbox folders">
 			{Object.values(props.chats).map((chat) => 
-				<Link to={'/chats/'+chat.id}  className={props.classes.link} key={chat.id} >
+				<Link to={'/gbCourse5Hw/chats/'+chat.id}  className={props.classes.link} key={chat.id} >
 					<ListItem button className={chat.id === props.chatId ? props.classes.active : props.classes.root} >					
 						<ListItemText primary={chat.name} />
 						<IconButton aria-label="close" onClick={(event) => props.handleRemoveChat(chat.id, event)}>
@@ -25,6 +25,6 @@ function ChatList(props) {
 		</List>
 	);
 
-}
+};
 
 export default ChatList;

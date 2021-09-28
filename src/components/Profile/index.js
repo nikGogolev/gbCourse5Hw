@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,9 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { signOut } from "firebase/auth";
 import { ref, onValue } from '@firebase/database';
 
-import { toggleProfileCheckbox } from '../../store/actions/toggleProfileCheckbox'
-import { setProfileNameWithSaga } from '../../store/actions/setProfileName'
-import { getProfileCheckboxState, getProfileWrongNameState } from '../../store/selectors/profileSelectors';
+import { setProfileNameWithSaga } from '../../store/actions/setProfileName';
+import { getProfileWrongNameState } from '../../store/selectors/profileSelectors';
 import { db, auth } from '../../services/firebase';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,40 +39,37 @@ function Profile(props) {
 	const [profileName, setProfileName] = useState('');
 
 	/*store*/
-	const profileCheckboxState = useSelector(getProfileCheckboxState);
 	// const profileName = useSelector(getProfileName);
 	const dispatch = useDispatch();
 	const wrongName = useSelector(getProfileWrongNameState);
 
 	/*handles*/
-	const handleCheckbox = () => {
-		dispatch(toggleProfileCheckbox(!profileCheckboxState));
-	};
 
-	const handleProfileName = (event) => {
+	const handleProfileName = useCallback((event) => {
 		event.preventDefault();
 		dispatch(setProfileNameWithSaga(newProfileName));
 		setNewProfileName('');
-	};
+	}, [dispatch]);
 
-	const handleNewProfileName = (event) => {
+	const handleNewProfileName = useCallback((event) => {
 		setNewProfileName(event.target.value);
-	};
+	},[]);
 
 	useEffect(() => {
 		const userName = ref(db, `profile/${auth.currentUser.uid}/username`);
-		onValue(userName, (snapshot) => {
+		const unsubscribe = onValue(userName, (snapshot) => {
 			const data = snapshot.val();
 			setProfileName(data);
 		});
+		return unsubscribe;
 	}, []);
 
 
-	const signOutUser = () => {
+	const signOutUser = useCallback(() => {
 		signOut(auth).then(() => {
 		}).catch((error) => {
 		});
-	};
+	},[]);
 
 	/*styles*/
 	const classes = useStyles();
@@ -87,18 +83,11 @@ function Profile(props) {
 					<TextField required className={classes.profileName} value={newProfileName} onChange={handleNewProfileName} id="standard-basic" label="Enter your name" variant="standard" />
 					<span className={(wrongName ? "" : classes.hidden) + " " + classes.wrongName}>Wrong name!</span>
 				</form>
-				<input id="display-my-name"
-					type="checkbox"
-					checked={profileCheckboxState}
-					onChange={handleCheckbox}
-					value={profileCheckboxState}>
-				</input>
-				<label htmlFor="display-my-name">Display my name</label>
 			</div>
-			<p className={profileCheckboxState ? "" : classes.hidden}>{profileName}</p>
+			<p><span className={(!profileName) ? classes.hidden:''}>Hi, </span>{profileName}<span className={(!profileName) ? classes.hidden:''}>!</span></p>
 			<button onClick={signOutUser}>Sign Out</button>
 		</div>
 	);
-}
+};
 
 export default Profile;

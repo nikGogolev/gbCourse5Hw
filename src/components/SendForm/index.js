@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 
 import {addMessageWithSaga} from '../../store/actions/addMessage';
 import {getProfileName} from '../../store/selectors/profileSelectors';
+import {getChats} from '../../store/selectors/chatSelectors';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -34,6 +35,7 @@ function SendForm(props) {
 	const [messageTheme, setMessageTheme] = useState('');
 	const [messageText, setMessageText] = useState('');
 	const messageAuthor = useSelector(getProfileName);
+	const chats = useSelector(getChats);
 	const formText = useRef(null);
 
 	/*roures*/
@@ -47,25 +49,25 @@ function SendForm(props) {
 	const classes = useStyles();
 	
 	/*handles*/
-	const handleAddMessage = useCallback((chatId, messageTheme, messageText, messageAuthor, event) => {
+	const handleAddMessage = useCallback((chatId, chatName, messageTheme, messageText, messageAuthor, event) => {
 		clearForm();
 		formText.current.focus()
 		if (event){event.preventDefault();}
-		dispatch(addMessageWithSaga(chatId, messageTheme, messageText, messageAuthor));
+		dispatch(addMessageWithSaga(chatId, chatName, messageTheme, messageText, messageAuthor));
 	},[dispatch]);
 	
-	const handleChangeTheme = (event) => {
+	const handleChangeTheme = useCallback((event) => {
 		setMessageTheme(event.target.value);
-	};
+	},[]);
 	
-	const handleChangeText = (event) => {
+	const handleChangeText = useCallback((event) => {
 		setMessageText(event.target.value);
-	};
+	},[]);
 	
-	const clearForm = () => {
+	const clearForm = useCallback(() => {
 		setMessageTheme('');
 		setMessageText('');
-	};
+	},[]);
 	
 	/*effects*/
 	useEffect(() => {
@@ -73,7 +75,7 @@ function SendForm(props) {
 	}, [chatId]);
 	
 	return (
-		<form action="" onSubmit={(event) => handleAddMessage(chatId, messageTheme, messageText, messageAuthor, event)} className={classes.root} noValidate autoComplete="off">
+		<form action="" onSubmit={(event) => handleAddMessage(chatId, chats[chatId].name, messageTheme, messageText, messageAuthor, event)} className={classes.root} noValidate autoComplete="off">
 			<TextField className={classes.text} value={messageTheme} onChange={handleChangeTheme} id="outlined-basic" label="Theme" variant="outlined"/>
 			<TextField className={classes.text} value={messageText} onChange={handleChangeText} inputRef={formText} multiline={true} rows="5" id="outlined-basic" label="Message" variant="outlined"/>
 			<Button type="submit" value="Send"
@@ -86,6 +88,6 @@ function SendForm(props) {
 			</Button>
 		</form>
 	);
-}
+};
 
 export default SendForm;

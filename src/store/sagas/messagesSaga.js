@@ -19,7 +19,7 @@ export const onAddMessageWithSaga = function* (action) {
         const newMessageId = yield `message-${+new Date()}`;
         const message = yield ref(db, `chats/${action.chatId}/messages/${newMessageId}`);
         yield update(message, { id: newMessageId, header: action.messageTheme, text: action.messageText, author: action.messageAuthor });
-        if (action.messageAuthor !== 'Bot') {
+        if (action.messageAuthor !== 'Bot' && action.chatName === 'Bot') {
             try {
                 yield delay(2000);
                 const weatherData = yield call(fetchData, URL_WEATHER);
@@ -28,13 +28,12 @@ export const onAddMessageWithSaga = function* (action) {
                 yield update(botMessage, { id: newBotMessageId, header: 'Погода', text: `Погода в Питере ${weatherData.clouds.all > 50 ? "облачная" : "безоблачная"}\nТемпература ${(weatherData.main.temp - 273).toFixed(1)} °C\nВлажность ${weatherData.main.humidity} %\nСкорость ветра ${weatherData.wind.speed} м/с`, author: 'Bot' });
             } catch (err) {
                 console.log(err.message);
-                //yield put(addMessage(action.chatId, 'Ошибка', err.message, 'Bot'));
             }
         }
     } catch (err) {
         console.log(err)
     };
-}
+};
 
 export const onRemoveMessageWithSaga = function* (action) {
     try {
@@ -43,4 +42,4 @@ export const onRemoveMessageWithSaga = function* (action) {
     } catch (err) {
         console.log(err);
     };
-}
+};

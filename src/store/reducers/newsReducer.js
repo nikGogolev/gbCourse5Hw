@@ -1,9 +1,10 @@
-import {GET_NEWS_REQUEST, GET_NEWS_SUCCESS, GET_NEWS_FAILURE} from '../actions/getNews'
+import {GET_NEWS_REQUEST, GET_NEWS_SUCCESS, GET_NEWS_FAILURE} from '../actions/getNews';
 import {STATUSES} from '../../utils/constants';
+import initialState from '../initialState';
 
-const initialState = {news: [], error: {status: false, message: ''}, status: 'idle'};
+const {news} = initialState;
 
-function newsReducer(state = initialState, action) {
+function newsReducer(state = news, action) {
     switch(action.type) {
         case GET_NEWS_REQUEST: return {...state, error: {...state.error, status: false}, status: STATUSES.REQUEST};
 		
@@ -13,6 +14,6 @@ function newsReducer(state = initialState, action) {
 		
         default: return state;
     }
-}
+};
 
 export default newsReducer;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../services/firebase';
 
@@ -55,10 +55,10 @@ function LogIn() {
         </div>
         <hr />
         <p>
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Don't have an account? <Link to="/gbCourse5Hw/signup">Sign up</Link>
         </p>
       </form>
     </div>
   );
 };
-export default LogIn
+export default LogIn;

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -66,6 +66,6 @@ function Message(props) {
 			</article>
 		)
 	);
-}
+};
 
 export default Message;

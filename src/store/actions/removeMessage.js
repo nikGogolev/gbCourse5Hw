@@ -1,4 +1,4 @@
-export const REMOVE_MESSAGE = 'CHATS::REMOVE_MESSAGE'
+export const REMOVE_MESSAGE = 'CHATS::REMOVE_MESSAGE';
 
 export const removeMessage = (chatId, messageId) => {
     return {
@@ -6,9 +6,9 @@ export const removeMessage = (chatId, messageId) => {
         chatId,
         messageId,
     };
-}
+};
 
-export const REMOVE_MESSAGE_WITH_SAGA = 'CHATS::REMOVE_MESSAGE_WITH_SAGA'
+export const REMOVE_MESSAGE_WITH_SAGA = 'CHATS::REMOVE_MESSAGE_WITH_SAGA';
 
 export const removeMessageWithSaga = (chatId, messageId) => {
     return {
@@ -16,4 +16,4 @@ export const removeMessageWithSaga = (chatId, messageId) => {
         chatId,
         messageId,
     };
-}
+};

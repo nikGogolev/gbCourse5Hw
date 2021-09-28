@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -53,15 +53,15 @@ function ChatListContainer(props) {
 		setChatName('');
 	}, [dispatch]);
 
-	const handleRemoveChat = (chatId, event) => {
+	const handleRemoveChat = useCallback((chatId, event) => {
 		event.preventDefault();
 		event.stopPropagation();
 		dispatch(removeChatWithSaga(chatId));
-	};
+	}, [dispatch]);
 
-	const hanldeChatName = (event) => {
+	const hanldeChatName = useCallback((event) => {
 		setChatName(event.target.value);
-	};
+	},[]);
 
 	useEffect(() => {
 		dispatch(initChatsWithSaga());
@@ -77,6 +77,6 @@ function ChatListContainer(props) {
 			<ChatList chats={chats} classes={classes} handleRemoveChat={handleRemoveChat} chatId={props.chatId} />
 		</div>
 	);
-}
+};
 
 export default ChatListContainer;

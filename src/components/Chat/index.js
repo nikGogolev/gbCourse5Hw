@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Message from '../Message'
-import ChatListContainer from '../ChatListContainer'
-import SendForm from '../SendForm'
+import Message from '../Message';
+import ChatListContainer from '../ChatListContainer';
+import SendForm from '../SendForm';
 
 import { getChats } from '../../store/selectors/chatSelectors';
 
@@ -36,20 +36,22 @@ function Chat(props) {
 
 	const chats = useSelector(getChats);
 
+	const MessagePure = React.memo(Message);
+
 	/*render*/
 	if (!!chatId && !chats[chatId]) {
-		return <Redirect to="/chats" />;
+		return <Redirect to="/gbCourse5Hw/chats" />;
 	}
 
 	return (
 		<div className={classes.root}>
 			<ChatListContainer chatList={chats} active={chatId} chatId={chatId} />
 			<div className={classes.chat}>
-				<Message messages={(!!chatId && chats[chatId].messages) ? Object.values(chats[chatId].messages) : []} chatId={chatId} />
+				<MessagePure messages={(!!chatId && chats[chatId].messages) ? Object.values(chats[chatId].messages) : []} chatId={chatId} />
 				{!!chatId && <SendForm />}
 			</div>
 		</div>
 	);
-}
+};
 
 export default Chat;

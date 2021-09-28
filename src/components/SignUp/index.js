@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../services/firebase';
 
@@ -8,13 +8,13 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handlePassChange = (e) => {
+  const handlePassChange = useCallback((e) => {
     setPassword(e.target.value);
-  };
+  },[]);
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = useCallback((e) => {
     setEmail(e.target.value);
-  };
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,10 +55,10 @@ function SignUp() {
         </div>
         <hr />
         <p>
-          Already have an account? <Link to="/login">Sign in</Link>
+          Already have an account? <Link to="/gbCourse5Hw/login">Sign in</Link>
         </p>
       </form>
     </div>
   );
-}
-export default SignUp
+};
+export default SignUp;

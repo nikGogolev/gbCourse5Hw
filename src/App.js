@@ -1,13 +1,13 @@
 import React from 'react';
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/es/integration/react'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
 
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
-import './App.css'
-import Router from './components/Router'
-import { store } from './store/store'
-import { persistor } from './store/store'
+import './App.css';
+import Router from './components/Router';
+import { store } from './store/store';
+import { persistor } from './store/store';
 
 const mainTheme = createTheme({
 	palette: {
@@ -33,6 +33,6 @@ function App() {
 			</PersistGate>
 		</Provider>
 	);
-}
+};
 
 export default App;

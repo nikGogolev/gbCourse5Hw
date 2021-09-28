@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { onAuthStateChanged } from "firebase/auth";
+
+import { initProfileNameWithSaga } from '../../store/actions/initProfileName';
 
 import Main from '../Main';
 import Chat from '../Chat';
@@ -12,6 +15,7 @@ import LogIn from '../LogIn';
 import PrivateRoute from '../../hocs/PrivateRoute';
 import PublicRoute from '../../hocs/PublicRoute';
 import { auth } from '../../services/firebase';
+import {HOMEPAGE} from '../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
 	header: {
@@ -56,55 +60,61 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+	
 
 	const [authed, setAuthed] = useState(false);
+	
+	const dispatch = useDispatch();
 
 	/*styles*/
 	const classes = useStyles();
-
 	useEffect(() => {
+
+		if (authed) {dispatch(initProfileNameWithSaga());};
+		
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				//const uid = user.uid;
+				dispatch(initProfileNameWithSaga());
 				setAuthed(true);
 			} else {
 				setAuthed(false);
 			}
 		});
 		return unsubscribe;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	/*render*/
 	return (
 		<BrowserRouter>
 			<header className={classes.header}>
-				<Link to='/'>Main</Link>
-				<Link to='/chats'>Chats</Link>
-				<Link to='/profile'>Profile</Link>
-				<Link to='/news'>News</Link>
-				<Link to='/signup'>Registration</Link>
-				<Link to='/login'>Login</Link>
+				<Link to={`${HOMEPAGE}/`}>Main</Link>
+				<Link to={`${HOMEPAGE}/chats`}>Chats</Link>
+				<Link to={`${HOMEPAGE}/profile`}>Profile</Link>
+				<Link to={`${HOMEPAGE}/news`}>News</Link>
+				<Link to={`${HOMEPAGE}/signup`}>Registration</Link>
+				<Link to={`${HOMEPAGE}/login`}>Login</Link>
 			</header>
 			<Switch>
-				<PrivateRoute authenticated={authed} path="/chats/:chatId?">
+				<PrivateRoute authenticated={authed} path={`${HOMEPAGE}/chats/:chatId?`}>
 					<Chat />
 				</PrivateRoute>
-				<PrivateRoute authenticated={authed} path='/profile'>
+				<PrivateRoute authenticated={authed} path={`${HOMEPAGE}/profile`}>
 					<Profile />
 				</PrivateRoute>
-				<PublicRoute authenticated={authed} path='/nochat'>
+				<PublicRoute authenticated={authed} path={`${HOMEPAGE}/nochat`}>
 					<h4>Здесь рыбы нет</h4>
 				</PublicRoute>
-				<PrivateRoute authenticated={authed} path='/news'>
+				<PrivateRoute authenticated={authed} path={`${HOMEPAGE}/news`}>
 					<News />
 				</PrivateRoute>
-				<PublicRoute authenticated={authed} path='/signup'>
+				<PublicRoute authenticated={authed} path={`${HOMEPAGE}/signup`}>
 					<SignUp />
 				</PublicRoute>
-				<PublicRoute authenticated={authed} path='/login'>
+				<PublicRoute authenticated={authed} path={`${HOMEPAGE}/login`}>
 					<LogIn />
 				</PublicRoute>
-				<PublicRoute exact authenticated={authed} path='/'>
+				<PublicRoute exact authenticated={authed} path={`${HOMEPAGE}/`}>
 					<Main />
 				</PublicRoute>
 				<Route authenticated={authed}>
@@ -113,6 +123,6 @@ function App() {
 			</Switch>
 		</BrowserRouter>
 	);
-}
+};
 
 export default App;

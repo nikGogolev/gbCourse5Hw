@@ -1,16 +1,27 @@
-import { put } from 'redux-saga/effects';
-
-import { setProfileName } from '../actions/setProfileName';
-import { ref, set } from '@firebase/database';
+import { initProfileName } from '../actions/initProfileName';
+import { ref, set, onValue } from '@firebase/database';
 import { auth, db } from '../../services/firebase';
+import { store } from '../store';
 
 export const onSetProfileNameWithSaga = function* (action) {
     try {
-        yield put(setProfileName(action.name));
-        yield set(ref(db, `profile/${auth.currentUser.uid}`), {
+		const profileName = ref(db, `profile/${auth.currentUser.uid}`);
+        yield set(profileName, {
             username: action.name
         });
     } catch (err) {
         yield console.log(err.message);
     }
-}
+};
+
+export const onInitProfileNameWithSaga = function*(){
+	try {
+		const profileName = ref(db, `profile/${auth.currentUser.uid}/username`);
+		yield onValue(profileName, (snapshot) => {
+            const data = snapshot.val();
+            store.dispatch(initProfileName(data || ''));
+        });
+    } catch (err) {
+        yield console.log(err.message);
+    }
+};
